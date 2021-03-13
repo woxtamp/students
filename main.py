@@ -25,22 +25,19 @@ class Student:
         return average_grade
 
     def __str__(self):
-        return ('Студент' + '\n' + 'Имя: ' + self.name + '\n' + 'Фамилия: ' + self.surname + '\n' +
-                'Средняя оценка за домашние задания: ' +
-                self.average_grade() + '\n' + 'Курсы в процессе изучения: ' +
-                ', '.join(self.courses_in_progress) + '\n' + 'Завершённые курсы: ' +
-                ', '.join(self.finished_courses) + '\n')
+        return (f'Студент \nИмя: {self.name} \nФамилия: {self.surname}'
+                f'\nСредняя оценка за домашние задания: {self.average_grade()}'
+                f'\nКурсы в процессе изучения: {", ".join(self.courses_in_progress)}'
+                f'\nЗавершённые курсы: {", ".join(self.finished_courses)}\n')
 
     def __gt__(self, other):
         if not isinstance(other, Student):
             return 'Ошибка! Это не студент!'
         else:
             if self.average_grade() > other.average_grade():
-                return ('Студент ' + self.name + ' ' + self.surname + ' успешнее, чем ' +
-                        other.name + ' ' + other.surname + '\n')
+                return f'Студент {self.name} {self.surname} успешнее, чем {other.name} {other.surname}\n'
             else:
-                return ('Студент ' + other.name + ' ' + other.surname + ' успешнее, чем ' +
-                        self.name + ' ' + self.surname + '\n')
+                return f'Студент {other.name} {other.surname} успешнее, чем {self.name} {self.surname}\n'
 
 
 class Mentor:
@@ -63,19 +60,17 @@ class Lecturer(Mentor):
         return average_rate
 
     def __str__(self):
-        return ('Лектор' + '\n' + 'Имя: ' + self.name + '\n' + 'Фамилия: ' + self.surname + '\n' +
-                'Средняя оценка за лекции: ' + self.average_rate() + '\n')
+        return (f'Лектор \nИмя: {self.name} \nФамилия: {self.surname}'
+                f'\nСредняя оценка за лекции: {self.average_rate()}\n')
 
     def __gt__(self, other):
         if not isinstance(other, Lecturer):
             return 'Ошибка! Это не лектор!'
         else:
             if self.average_rate() > other.average_rate():
-                return ('Лектор ' + self.name + ' ' + self.surname + ' успешнее, чем ' +
-                        other.name + ' ' + other.surname + '\n')
+                return f'Лектор {self.name} {self.surname} успешнее, чем {other.name} {other.surname}\n'
             else:
-                return ('Лектор ' + other.name + ' ' + other.surname + ' успешнее, чем ' +
-                        self.name + ' ' + self.surname + '\n')
+                return f'Лектор {other.name} {other.surname} успешнее, чем {self.name} {self.surname}\n'
 
 
 class Reviewer(Mentor):
@@ -89,7 +84,7 @@ class Reviewer(Mentor):
             return 'Ошибка'
 
     def __str__(self):
-        return 'Проверяющий' + '\n' + 'Имя: ' + self.name + '\n' + 'Фамилия: ' + self.surname + '\n'
+        return f'Проверяющий \nИмя: {self.name} \nФамилия: {self.surname}\n'
 
 
 student_ivanov = Student('Иванов', 'Иван', 'male')
@@ -137,10 +132,8 @@ def avg_grades_all(students_list, course):
     for student in students_list:
         if student.grades.get(course) is not None:
             all_grades_list += student.grades.get(course)
-        else:
-            pass
     all_grades_avg = str(sum(all_grades_list) / len(all_grades_list))
-    print('Средняя оценка всех студентов за домашние задания по курсу ' + course + ': ' + all_grades_avg)
+    print(f'Средняя оценка всех студентов за домашние задания по курсу {course}: {all_grades_avg}')
 
 
 def avg_rates_all(lecturer_list, course):
@@ -148,10 +141,8 @@ def avg_rates_all(lecturer_list, course):
     for lecturer in lecturer_list:
         if lecturer.rating.get(course) is not None:
             all_rates_list += lecturer.rating.get(course)
-        else:
-            pass
     all_rates_avg = str(sum(all_rates_list) / len(all_rates_list))
-    print('Средняя оценка всех лекторов в рамках курса ' + course + ': ' + all_rates_avg)
+    print(f'Средняя оценка всех лекторов в рамках курса {course}: {all_rates_avg}')
 
 
 avg_grades_all([student_ivanov, student_petrova], 'Python')
